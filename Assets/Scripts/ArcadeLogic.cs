@@ -56,7 +56,11 @@ public class ArcadeLogic : MonoBehaviour {
 
         }
 
-        if (Input.GetButton("Jump")) playing = true;
+        if (Input.GetButton("Jump"))
+        {
+            startCanvas.SetActive(false);
+            playing = true;
+        } 
         
 	}
 
