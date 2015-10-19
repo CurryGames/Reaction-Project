@@ -32,5 +32,6 @@ public class ArcadeLogic : MonoBehaviour {
         }
 
         timeTxt.text = "Time: " + currentTime.ToString("00.00");
+        limitTxt.text = "Limit: " + currentLimit.ToString("0.000") + "s";
 	}
 }
