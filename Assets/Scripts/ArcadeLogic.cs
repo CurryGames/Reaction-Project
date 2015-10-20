@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class ArcadeLogic : MonoBehaviour {
 
-    public Text timeTxt, limitTxt, maxTime;
+    public Text timeTxt, limitTxt, maxTime, levelTxt;
     public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
 
     private float currentTime;
     private float limitTime;
     private float levelTimer;
+    private int level;
     public bool playing;
     public bool defeat;
 
@@ -19,10 +20,12 @@ public class ArcadeLogic : MonoBehaviour {
     {
         playing = false;
         currentTime = 0;
+        level = 1;
         limitTime = 1.5f;
         levelTimer = 0;
         limitSlider.maxValue = limitTime;
         limitSlider.value = limitSlider.maxValue;
+        levelTxt.text = "Level " + level.ToString();
 	}
 	
 	// Update is called once per frame
@@ -47,10 +50,8 @@ public class ArcadeLogic : MonoBehaviour {
 
             if (Input.GetButtonDown("Fire1"))
             {
-                //limitTime *= 0.95f;
-                //currentLimit = limitTime;
-                //limitSlider.maxValue = limitTime;
-                limitSlider.value = limitSlider.maxValue;
+                TargetClicked();
+                
             }
 
 
@@ -64,11 +65,18 @@ public class ArcadeLogic : MonoBehaviour {
         
 	}
 
+    void TargetClicked()
+    {
+        limitSlider.value = limitSlider.maxValue;
+    }
+
     void UpdateLevel()
     {
+        level++;
         limitTime *= 0.95f;
         limitSlider.maxValue = limitTime;
         levelTimer = 0;
+        levelTxt.text = "Level " + level.ToString();
     }
 
     void Defeat()
