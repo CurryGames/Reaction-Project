@@ -61,11 +61,21 @@ public class ArcadeLogic : MonoBehaviour {
                 }
                 
             }
+            else if(Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                {
+                    targetArray.ActivateTarget();
+                    TargetClicked();
+                }
 
+            }
 
         }
 
-        if (Input.GetButton("Jump"))
+        if ((Input.GetButton("Jump") || (Input.GetTouch(0).phase == TouchPhase.Began)  )&&)
         {
             startCanvas.SetActive(false);
             playing = true;
