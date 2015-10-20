@@ -10,7 +10,7 @@ public class ArcadeLogic : MonoBehaviour {
 
     private float currentTime;
     private float limitTime;
-    private float levelTimer;
+    public float levelTimer;
     private int level;
     public bool playing;
     public bool defeat;
