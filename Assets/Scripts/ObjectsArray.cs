@@ -4,6 +4,7 @@ using System.Collections;
 public class ObjectsArray : MonoBehaviour {
 
     public GameObject target;
+    public GameObject noTarget;
     private GameObject[] m_targetArray;
     public Color[] targetColor;
     public int maxTarget;
@@ -17,7 +18,7 @@ public class ObjectsArray : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         m_targetArray = new GameObject[maxTarget];
-        CreateArray(m_targetArray, target);
+        CreateArray(m_targetArray, target, noTarget);
         m_maxTime = Random.Range(minTime, maxTime);
 	}
 	
@@ -33,11 +34,13 @@ public class ObjectsArray : MonoBehaviour {
         }
 	}
 
-    void CreateArray(GameObject[] tArray, GameObject tGameObject)
+    void CreateArray(GameObject[] tArray, GameObject tGameObject, GameObject dGameObject)
     {
         for (int i = 0; i < maxTarget; i++)
         {
-            GameObject t = (GameObject)Instantiate(tGameObject, Vector3.zero, Quaternion.identity);
+            GameObject t;
+            if(i == 0)t = (GameObject)Instantiate(tGameObject, Vector3.zero, Quaternion.identity);
+            else t = (GameObject)Instantiate(dGameObject, Vector3.zero, Quaternion.identity);
             //m_material[i] = t.GetComponent<SpriteRenderer>();
             t.SetActive(false);
             tArray[i] = t;
@@ -46,18 +49,18 @@ public class ObjectsArray : MonoBehaviour {
 
     void ActivateTarget(GameObject[] tArray)
     {
-        int counter = 0;
-        m_position = new Vector3(Random.Range(left.position.x, rigth.position.x), Random.Range(bot.position.y, top.position.y), 0);
+        //int counter = 0;
+        
 
         for (int i = 0; i < maxTarget; i++)
         {
-            if (!tArray[i].activeInHierarchy && counter < 1)
+            if (!tArray[i].activeInHierarchy)
             {
-
+                m_position = new Vector3((int)Random.Range(left.position.x, rigth.position.x), (int)Random.Range(bot.position.y, top.position.y), 0);
                 tArray[i].transform.position = m_position;
                 tArray[i].SetActive(true);
-                tArray[i].GetComponent<SpriteRenderer>().color = targetColor[Random.Range(0, targetColor.Length)];
-                counter++;
+                //tArray[i].GetComponent<SpriteRenderer>().color = targetColor[Random.Range(0, targetColor.Length)];
+                //counter++;
             }
         }
     }
