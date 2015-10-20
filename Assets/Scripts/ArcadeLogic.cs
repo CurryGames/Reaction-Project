@@ -61,7 +61,7 @@ public class ArcadeLogic : MonoBehaviour {
                 }
                 
             }
-            else if(Input.GetTouch(0).phase == TouchPhase.Began)
+            else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
                 RaycastHit hit;
@@ -75,11 +75,13 @@ public class ArcadeLogic : MonoBehaviour {
 
         }
 
-        if ((Input.GetButton("Jump") || (Input.GetTouch(0).phase == TouchPhase.Began)  )&&)
+        if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
         {
             startCanvas.SetActive(false);
             playing = true;
-        } 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
         
 	}
 
@@ -105,7 +107,7 @@ public class ArcadeLogic : MonoBehaviour {
 
     public void Reload()
     {
-        Application.LoadLevel("ArcadeLevel");
+        Application.LoadLevel(0);
     }
 
 }
