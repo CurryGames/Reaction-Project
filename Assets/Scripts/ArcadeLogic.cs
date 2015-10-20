@@ -7,10 +7,12 @@ public class ArcadeLogic : MonoBehaviour {
     public Text timeTxt, limitTxt, maxTime, levelTxt;
     public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
+    public LayerMask layerMask;
 
     private float currentTime;
     private float limitTime;
     public float levelTimer;
+    public ObjectsArray targetArray;
     private int level;
     public bool playing;
     public bool defeat;
@@ -50,7 +52,13 @@ public class ArcadeLogic : MonoBehaviour {
 
             if (Input.GetButtonDown("Fire1"))
             {
-                TargetClicked();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                {
+                    targetArray.ActivateTarget();
+                    TargetClicked();
+                }
                 
             }
 
