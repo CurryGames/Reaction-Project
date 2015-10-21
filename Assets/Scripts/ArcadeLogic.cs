@@ -11,6 +11,7 @@ public class ArcadeLogic : MonoBehaviour {
 
     private float currentTime;
     private float limitTime;
+    private AudioManager audioManager;
     public float levelTimer;
     public ObjectsArray targetArray;
     private int level;
@@ -20,6 +21,7 @@ public class ArcadeLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         playing = false;
         currentTime = 0;
         level = 1;
@@ -57,6 +59,8 @@ public class ArcadeLogic : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
                     targetArray.realocating = true;
+                    AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                    audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();
                 }
                 
@@ -68,6 +72,8 @@ public class ArcadeLogic : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
                     targetArray.realocating = true;
+                    AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                    audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();
                 }
 
