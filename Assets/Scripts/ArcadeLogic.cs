@@ -48,7 +48,7 @@ public class ArcadeLogic : MonoBehaviour {
     
 
             timeTxt.text = "Time: " + currentTime.ToString("00.00");
-            limitTxt.text = "Limit: " + limitTime.ToString("0.000") + "s";
+            limitTxt.text = "Limit: " + limitTime.ToString("0.000");
 
             if (Input.GetButtonDown("Fire1"))
             {
