@@ -56,7 +56,7 @@ public class ArcadeLogic : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
-                    targetArray.ActivateTarget();
+                    targetArray.realocating = true;
                     TargetClicked();
                 }
                 
@@ -67,7 +67,7 @@ public class ArcadeLogic : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
-                    targetArray.ActivateTarget();
+                    targetArray.realocating = true;
                     TargetClicked();
                 }
 
