@@ -43,6 +43,7 @@ public class TargetAnimation : MonoBehaviour {
         {
             desactivateParticles.Stop();
             currentTime = 0.0f;
+            activate = true;
             desactivate = false;
         }
     }
