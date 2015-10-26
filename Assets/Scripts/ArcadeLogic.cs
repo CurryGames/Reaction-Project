@@ -7,7 +7,7 @@ public class ArcadeLogic : MonoBehaviour {
     public Text timeTxt, limitTxt, maxTime, levelTxt;
     public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
-    public LayerMask layerMask;
+    public LayerMask layerMask, noTargetMask;
 
     private float currentTime;
     private float limitTime;
@@ -63,6 +63,11 @@ public class ArcadeLogic : MonoBehaviour {
                     audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();
                 }
+                else if (Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
+                {
+                    playing = false;
+                    Defeat();
+                }
                 
             }
             else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -76,12 +81,17 @@ public class ArcadeLogic : MonoBehaviour {
                     audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();
                 }
+                else if(Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
+                {
+                    playing = false;
+                    Defeat();
+                }
 
             }
 
         }
 
-        if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
+        if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && startCanvas.activeInHierarchy)
         {
             startCanvas.SetActive(false);
             playing = true;
