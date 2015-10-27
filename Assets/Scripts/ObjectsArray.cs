@@ -54,7 +54,6 @@ public class ObjectsArray : MonoBehaviour {
         {
             for (int i = 0; i < maxTarget; i++)
             {
-
                 m_position = new Vector3((int)Random.Range(left.position.x, rigth.position.x), (int)Random.Range(bot.position.y, top.position.y), 0);
                 m_targetArray[i].transform.position = m_position;
                 m_targetArray[i].SetActive(true);
@@ -63,8 +62,7 @@ public class ObjectsArray : MonoBehaviour {
             }
             currentTime = 0;
             realocating = false;
-        }
-
-        
+        }      
     }
+
 }
