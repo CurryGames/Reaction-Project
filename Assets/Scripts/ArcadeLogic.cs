@@ -40,7 +40,7 @@ public class ArcadeLogic : MonoBehaviour {
             currentTime += Time.deltaTime;
             //limitSlider.value -= Time.deltaTime;
             levelTimer += Time.deltaTime;
-            if (limitSlider.value <= 0)
+            if (targetArray.lifes <= 0)
             {
                 playing = false;
                 Defeat();
@@ -71,6 +71,7 @@ public class ArcadeLogic : MonoBehaviour {
         {
             startCanvas.SetActive(false);
             playing = true;
+            targetArray.playing = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
