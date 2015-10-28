@@ -42,7 +42,6 @@ public class AimLogic : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
-                    targetArray.realocating = true;
                     AudioSource audiSor = gameObject.AddComponent<AudioSource>();
                     audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();
@@ -59,7 +58,6 @@ public class AimLogic : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
-                    targetArray.realocating = true;
                     AudioSource audiSor = gameObject.AddComponent<AudioSource>();
                     audioManager.Play(audioManager.laser, audiSor, 1.0f);
                     TargetClicked();

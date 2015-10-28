@@ -71,6 +71,7 @@ public class ArcadeLogic : MonoBehaviour {
         {
             startCanvas.SetActive(false);
             playing = true;
+            targetArray.playing = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 

@@ -8,32 +8,34 @@ public class ObjectsArray : MonoBehaviour {
     public ParticleSystem[] destroyParticlesArray;
     //public GameObject noTarget;
     private GameObject[] m_targetArray;
-    private TargetAnimation[] targetAnimation;
-    public bool realocating;
+    public bool playing;
     public float currentTime, maxTime;
     public int maxTarget;
     public Transform top, bot, left, rigth;
     private Vector3 m_position;
+    public int lifes;
 
 	// Use this for initialization
 	void Start () {
         m_targetArray = new GameObject[maxTarget];
-        targetAnimation = new TargetAnimation[maxTarget];
         destroyParticlesArray = new ParticleSystem[maxTarget];
         CreateArray(m_targetArray, target, destroyParticlesArray, destroyParticles);
-        ActivateTarget();
+        //ActivateTarget();
         maxTime = Random.Range(0.5f, 1.0f);
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        currentTime += Time.deltaTime;
-        if (currentTime >= maxTime)
+        if (playing)
         {
-            ActivateTarget();
-            currentTime = 0;
-            maxTime = Random.Range(1.0f, 1.5f);
+            currentTime += Time.deltaTime;
+            if (currentTime >= maxTime)
+            {
+                ActivateTarget();
+                currentTime = 0;
+                maxTime = Random.Range(0.5f, 1.0f);
+            }
         }
 	}
 

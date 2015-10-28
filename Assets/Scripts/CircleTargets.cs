@@ -3,22 +3,18 @@ using System.Collections;
 
 public class CircleTargets : MonoBehaviour {
 
-    SpriteRenderer fillCircle;
-    Color color;
     ObjectsArray targetArray;
     public GameObject parentGameObject;
     private Transform m_myTransform;
     //public LayerMask layerMask;
 
     float duration;
-    bool stoped = false;
 
 
     // Use this for initialization
     void Start () 
     {
         m_myTransform = transform;
-        fillCircle = GetComponent<SpriteRenderer>();
         targetArray = GameObject.FindGameObjectWithTag("Spawn").GetComponent<ObjectsArray>();
 	}
 	
