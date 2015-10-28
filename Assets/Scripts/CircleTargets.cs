@@ -21,10 +21,11 @@ public class CircleTargets : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        m_myTransform.localScale -= new Vector3(0.2f, 0.2f, 0) * Time.deltaTime;
+        m_myTransform.localScale -= new Vector3(0.4f, 0.4f, 0) * Time.deltaTime;
 
         if(m_myTransform.localScale.x <= 0)
         {
+            targetArray.RestLife();
             m_myTransform.localScale = new Vector3(1, 1, 1);
             targetArray.ActivateParticles(parentGameObject.transform.position);
             parentGameObject.SetActive(false);

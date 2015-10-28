@@ -13,7 +13,8 @@ public class ObjectsArray : MonoBehaviour {
     public int maxTarget;
     public Transform top, bot, left, rigth;
     private Vector3 m_position;
-    public int lifes;
+    public int lifes = 3;
+    public GameObject[] lifesImage = new GameObject[3];
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +35,7 @@ public class ObjectsArray : MonoBehaviour {
             {
                 ActivateTarget();
                 currentTime = 0;
-                maxTime = Random.Range(0.5f, 1.0f);
+                maxTime = Random.Range(0.2f, 0.8f);
             }
         }
 	}
@@ -94,4 +95,9 @@ public class ObjectsArray : MonoBehaviour {
         }
     }
 
+    public void RestLife()
+    {
+        lifes--;
+        if(lifes >= 0)lifesImage[lifes].SetActive(false);
+    }
 }

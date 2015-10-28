@@ -104,12 +104,13 @@ public class SemaphoreLogic : MonoBehaviour {
             }
         }
 
-        
-
-        
-
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
 	}
+
+    public void Reload()
+    {
+        Application.LoadLevel(0);
+    }
 
     void Clicking(Ray ray)
     {
