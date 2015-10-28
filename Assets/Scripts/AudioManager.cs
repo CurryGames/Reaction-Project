@@ -4,15 +4,21 @@ using System.Collections;
 public class AudioManager : MonoBehaviour {
 
     public AudioClip laser;
+    public ArcadeLogic arlogic;
+    private AudioSource audioSor;
+    private float myPitch;
 
 	// Use this for initialization
 	void Start () {
-	
+        arlogic = GetComponent<ArcadeLogic>();
+        audioSor = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        //myPitch = arlogic.pitchRate;
+        //audioSor.pitch = arlogic.pitchRate;
+        audioSor.pitch += 0.0083f * Time.deltaTime;
 	}
 
     // FUNCION PLAY: REPRODUCE UN SONIDO 

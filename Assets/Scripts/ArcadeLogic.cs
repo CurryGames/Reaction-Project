@@ -17,6 +17,7 @@ public class ArcadeLogic : MonoBehaviour {
     private int level;
     public bool playing;
     public bool defeat;
+    public float pitchMod, pitchRate;
 
 	// Use this for initialization
 	void Start () 
@@ -30,6 +31,8 @@ public class ArcadeLogic : MonoBehaviour {
         limitSlider.maxValue = limitTime;
         limitSlider.value = limitSlider.maxValue;
         levelTxt.text = "Level " + level.ToString();
+        pitchMod = 0;
+        pitchRate = 1;
 	}
 	
 	// Update is called once per frame
@@ -64,6 +67,9 @@ public class ArcadeLogic : MonoBehaviour {
 
                 Clicking(ray);
             }
+
+            pitchMod += 0.0083f * Time.deltaTime;
+            pitchRate = 1 + pitchMod;
 
         }
 

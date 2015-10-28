@@ -8,7 +8,7 @@ public class CircleTargets : MonoBehaviour {
     private Transform m_myTransform;
     //public LayerMask layerMask;
 
-    float duration;
+    public float duration;
 
 
     // Use this for initialization
@@ -21,7 +21,7 @@ public class CircleTargets : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        m_myTransform.localScale -= new Vector3(0.4f, 0.4f, 0) * Time.deltaTime;
+        m_myTransform.localScale -= new Vector3(1/duration, 1/duration, 0) * Time.deltaTime;
 
         if(m_myTransform.localScale.x <= 0)
         {

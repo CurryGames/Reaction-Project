@@ -9,7 +9,7 @@ public class ObjectsArray : MonoBehaviour {
     //public GameObject noTarget;
     private GameObject[] m_targetArray;
     public bool playing;
-    public float currentTime, maxTime;
+    public float currentTime, maxTime, maxRan, minRan;
     public int maxTarget;
     public Transform top, bot, left, rigth;
     private Vector3 m_position;
@@ -22,7 +22,9 @@ public class ObjectsArray : MonoBehaviour {
         destroyParticlesArray = new ParticleSystem[maxTarget];
         CreateArray(m_targetArray, target, destroyParticlesArray, destroyParticles);
         //ActivateTarget();
-        maxTime = Random.Range(0.5f, 1.0f);
+        minRan = 0.5f;
+        maxRan = 1f;
+        maxTime = Random.Range(minRan, maxRan);
     }
 	
 	// Update is called once per frame
@@ -35,8 +37,13 @@ public class ObjectsArray : MonoBehaviour {
             {
                 ActivateTarget();
                 currentTime = 0;
-                maxTime = Random.Range(0.2f, 0.8f);
+                maxTime = Random.Range(minRan, maxRan);
             }
+
+            if (lifes <= 0) playing = false;
+
+            if (minRan >= 0.2f) minRan -= 0.004f * Time.deltaTime;
+            if (maxRan >= 0.2) maxRan -= 0.006f * Time.deltaTime;
         }
 	}
 
@@ -46,8 +53,8 @@ public class ObjectsArray : MonoBehaviour {
         {
             GameObject t;
             ParticleSystem p;
-            t = (GameObject)Instantiate(tGameObject, Vector3.zero, Quaternion.identity);
-            p = (ParticleSystem)Instantiate(pSystem, Vector3.zero, Quaternion.identity);
+            t = (GameObject)Instantiate(tGameObject, Vector3.one * 20, Quaternion.identity);
+            p = (ParticleSystem)Instantiate(pSystem, Vector3.one * 20, Quaternion.identity);
             //targetAnimation[i] = t.GetComponent<TargetAnimation>();
             //m_material[i] = t.GetComponent<SpriteRenderer>();
             t.SetActive(false);
@@ -66,9 +73,10 @@ public class ObjectsArray : MonoBehaviour {
         {
             if (counter < 1 && !m_targetArray[i].activeInHierarchy)
             {
-                m_position = new Vector3((int)Random.Range(left.position.x, rigth.position.x), (int)Random.Range(bot.position.y, top.position.y), 0);
-                m_targetArray[i].transform.position = m_position;
-                m_targetArray[i].SetActive(true);
+                m_position = new Vector3(Random.Range((int)left.position.x, (int)rigth.position.x), Random.Range((int)bot.position.y, (int)top.position.y), 0);
+                    m_targetArray[i].transform.position = m_position;
+                    m_targetArray[i].SetActive(true);
+                         
                 //tArray[i].GetComponent<SpriteRenderer>().color = targetColor[Random.Range(0, targetColor.Length)];
                 counter++;
             }
@@ -77,6 +85,7 @@ public class ObjectsArray : MonoBehaviour {
         //realocating = false;
    
     }
+
 
     public void ActivateParticles(Vector3 position)
     {
