@@ -4,11 +4,13 @@ using System.Collections;
 public class ObjectsArray : MonoBehaviour {
 
     public GameObject target;
-    public GameObject noTarget;
+    public ParticleSystem destroyParticles;
+    public ParticleSystem[] destroyParticlesArray;
+    //public GameObject noTarget;
     private GameObject[] m_targetArray;
     private TargetAnimation[] targetAnimation;
     public bool realocating;
-    float currentTime;
+    public float currentTime, maxTime;
     public int maxTarget;
     public Transform top, bot, left, rigth;
     private Vector3 m_position;
@@ -17,52 +19,77 @@ public class ObjectsArray : MonoBehaviour {
 	void Start () {
         m_targetArray = new GameObject[maxTarget];
         targetAnimation = new TargetAnimation[maxTarget];
-        CreateArray(m_targetArray, target, noTarget);
+        destroyParticlesArray = new ParticleSystem[maxTarget];
+        CreateArray(m_targetArray, target, destroyParticlesArray, destroyParticles);
         ActivateTarget();
-	}
+        maxTime = Random.Range(0.5f, 1.0f);
+    }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (realocating) ActivateTarget();
+        currentTime += Time.deltaTime;
+        if (currentTime >= maxTime)
+        {
+            ActivateTarget();
+            currentTime = 0;
+            maxTime = Random.Range(1.0f, 1.5f);
+        }
 	}
 
-    void CreateArray(GameObject[] tArray, GameObject tGameObject, GameObject dGameObject)
+    void CreateArray(GameObject[] tArray, GameObject tGameObject, ParticleSystem[] pArray, ParticleSystem pSystem)
     {
         for (int i = 0; i < maxTarget; i++)
         {
             GameObject t;
-            if(i == 0)t = (GameObject)Instantiate(tGameObject, Vector3.zero, Quaternion.identity);
-            else t = (GameObject)Instantiate(dGameObject, Vector3.zero, Quaternion.identity);
-            targetAnimation[i] = t.GetComponent<TargetAnimation>();
+            ParticleSystem p;
+            t = (GameObject)Instantiate(tGameObject, Vector3.zero, Quaternion.identity);
+            p = (ParticleSystem)Instantiate(pSystem, Vector3.zero, Quaternion.identity);
+            //targetAnimation[i] = t.GetComponent<TargetAnimation>();
             //m_material[i] = t.GetComponent<SpriteRenderer>();
-            //t.SetActive(false);
+            t.SetActive(false);
             tArray[i] = t;
+            pArray[i] = p;
         }
     }
 
     public void ActivateTarget()
     {
-        //int counter = 0;
-        currentTime += Time.deltaTime;
+        int counter = 0;
+        //currentTime += Time.deltaTime;
+        
+        
         for (int i = 0; i < maxTarget; i++)
         {
-            targetAnimation[i].desactivate = true;
-        }
-        
-        if(currentTime >= targetAnimation[0].desactivateParticles.duration)
-        {
-            for (int i = 0; i < maxTarget; i++)
+            if (counter < 1 && !m_targetArray[i].activeInHierarchy)
             {
                 m_position = new Vector3((int)Random.Range(left.position.x, rigth.position.x), (int)Random.Range(bot.position.y, top.position.y), 0);
                 m_targetArray[i].transform.position = m_position;
                 m_targetArray[i].SetActive(true);
                 //tArray[i].GetComponent<SpriteRenderer>().color = targetColor[Random.Range(0, targetColor.Length)];
-                //counter++;
+                counter++;
             }
-            currentTime = 0;
-            realocating = false;
-        }      
+        }
+        //currentTime = 0;
+        //realocating = false;
+   
+    }
+
+    public void ActivateParticles(Vector3 position)
+    {
+
+        int counter = 0;
+
+        for (int i = 0; i < maxTarget; i++)
+        {
+            if (counter < 1 && !destroyParticlesArray[i].isPlaying)
+            {
+                destroyParticlesArray[i].transform.position = position;
+                destroyParticlesArray[i].Play();
+                //tArray[i].GetComponent<SpriteRenderer>().color = targetColor[Random.Range(0, targetColor.Length)];
+                counter++;
+            }
+        }
     }
 
 }

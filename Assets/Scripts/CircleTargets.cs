@@ -5,27 +5,39 @@ public class CircleTargets : MonoBehaviour {
 
     SpriteRenderer fillCircle;
     Color color;
-
-    public LayerMask layerMask;
+    ObjectsArray targetArray;
+    public GameObject parentGameObject;
+    private Transform m_myTransform;
+    //public LayerMask layerMask;
 
     float duration;
     bool stoped = false;
-    
 
-	// Use this for initialization
-	void Start () 
+
+    // Use this for initialization
+    void Start () 
     {
-
+        m_myTransform = transform;
         fillCircle = GetComponent<SpriteRenderer>();
+        targetArray = GameObject.FindGameObjectWithTag("Spawn").GetComponent<ObjectsArray>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        m_myTransform.localScale -= new Vector3(0.2f, 0.2f, 0) * Time.deltaTime;
+
+        if(m_myTransform.localScale.x <= 0)
+        {
+            m_myTransform.localScale = new Vector3(1, 1, 1);
+            targetArray.ActivateParticles(parentGameObject.transform.position);
+            parentGameObject.SetActive(false);
+        }
+        /*
         if (!stoped)
         {
-            fillCircle.transform.localScale -= new Vector3(0.2f, 0.2f, 0) * Time.deltaTime;
-
+            
+            
             if (Input.GetButtonDown("Fire1"))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -50,14 +62,24 @@ public class CircleTargets : MonoBehaviour {
                     TargetClicked();
                 }
             }
+            
         }
-        
+        */
 	}
+    
+   
+    /*
+    void OnDisable()
+    {
+        
+        
+    }
 
+    
     void TargetClicked()
     {
         stoped = true;
         //activate click animation
         Debug.Log("clicked!");
-    }
+    }*/
 }

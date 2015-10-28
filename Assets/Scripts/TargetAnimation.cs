@@ -13,11 +13,16 @@ public class TargetAnimation : MonoBehaviour {
 	void Start () {
         activate = true;
 	}
+
+    void OnActive()
+    {
+        activate = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (activate) ActivateAnimation();
-        if (desactivate) DesactivateAnimation();
+        //if (desactivate) DesactivateAnimation();
 	}
 
     void ActivateAnimation()
@@ -34,7 +39,7 @@ public class TargetAnimation : MonoBehaviour {
         }
     }
 
-    void DesactivateAnimation()
+   /* void DesactivateAnimation()
     {
         targetSprite.SetActive(false);
         desactivateParticles.Play();
@@ -46,5 +51,5 @@ public class TargetAnimation : MonoBehaviour {
             activate = true;
             desactivate = false;
         }
-    }
+    }*/
 }

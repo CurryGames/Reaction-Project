@@ -38,7 +38,7 @@ public class ArcadeLogic : MonoBehaviour {
         if (playing)
         {
             currentTime += Time.deltaTime;
-            limitSlider.value -= Time.deltaTime;
+            //limitSlider.value -= Time.deltaTime;
             levelTimer += Time.deltaTime;
             if (limitSlider.value <= 0)
             {
@@ -55,38 +55,14 @@ public class ArcadeLogic : MonoBehaviour {
             if (Input.GetButtonDown("Fire1"))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-                {
-                    targetArray.realocating = true;
-                    AudioSource audiSor = gameObject.AddComponent<AudioSource>();
-                    audioManager.Play(audioManager.laser, audiSor, 1.0f);
-                    TargetClicked();
-                }
-                else if (Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
-                {
-                    playing = false;
-                    Defeat();
-                }
-                
+                Clicking(ray);
+
             }
             else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-                {
-                    targetArray.realocating = true;
-                    AudioSource audiSor = gameObject.AddComponent<AudioSource>();
-                    audioManager.Play(audioManager.laser, audiSor, 1.0f);
-                    TargetClicked();
-                }
-                else if(Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
-                {
-                    playing = false;
-                    Defeat();
-                }
 
+                Clicking(ray);
             }
 
         }
@@ -124,6 +100,21 @@ public class ArcadeLogic : MonoBehaviour {
     public void Reload()
     {
         Application.LoadLevel(0);
+    }
+
+    public void Clicking(Ray ray)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            //targetArray.realocating = true;
+            targetArray.ActivateParticles(hit.transform.gameObject.transform.position);
+            hit.transform.parent.gameObject.SetActive(false);
+            AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+            audioManager.Play(audioManager.laser, audiSor, 1.0f);
+            TargetClicked();
+        }
+        
     }
 
 }
