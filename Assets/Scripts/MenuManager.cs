@@ -18,9 +18,19 @@ public class MenuManager : MonoBehaviour {
 
     }
 
-    public void ArcadeButton()
+    public void LevelAim()
     {
-        Application.LoadLevel("ArcadeLevel");
+        Application.LoadLevel(2);
+    }
+
+    public void LevelReaction()
+    {
+        Application.LoadLevel(1);
+    }
+
+    public void LevelColor()
+    {
+        Application.LoadLevel(3);
     }
 
     public void OptionsButton()
