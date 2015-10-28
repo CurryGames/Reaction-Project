@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: e27e38e156ba4734bbc94f0f86940086
-timeCreated: 1446023696
+timeCreated: 1446026693
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: buttons_0
     21300002: buttons_1
     21300004: buttons_2
+    21300006: buttons_3
+    21300008: buttons_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,32 +58,52 @@ TextureImporter:
     - name: buttons_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 136
-        width: 249
+        x: 6
+        y: 392
+        width: 247
         height: 112
       alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 23, y: 11, z: 23, w: 11}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: buttons_1
       rect:
         serializedVersion: 2
         x: 270
-        y: 148
+        y: 404
         width: 226
         height: 100
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: buttons_2
       rect:
         serializedVersion: 2
-        x: 15
-        y: 12
-        width: 230
-        height: 104
+        x: 13
+        y: 278
+        width: 226
+        height: 98
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: buttons_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 265
+        width: 256
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: buttons_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 164
+        width: 250
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
