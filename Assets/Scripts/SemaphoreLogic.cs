@@ -14,9 +14,10 @@ public class SemaphoreLogic : MonoBehaviour {
     public bool onGreen;
     public LayerMask targetMask, noTargetMask;
     public AudioManager audioManager;
+    public NativeShare nativeShare;
     public float[] marks;
     public Text[] marksText = new Text[5];
-    public Text totalReactionText, waitingText;
+    public Text totalReactionText, waitingText, hsReaction;
 
 	// Use this for initialization
 	void Start () {
@@ -102,7 +103,13 @@ public class SemaphoreLogic : MonoBehaviour {
             }
             case SemaphoreState.DEFEAT:
             {
-                break;
+                    if (PlayerPrefs.GetFloat("SemaphoreHS") < currentTime)
+                    {
+                        PlayerPrefs.SetFloat("SemaphoreHS", currentTime);
+                    }
+
+                    hsReaction.text = "Best Time: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString();
+                    break;
             }
         }
 
@@ -139,5 +146,10 @@ public class SemaphoreLogic : MonoBehaviour {
 
         state = SemaphoreState.WAITING;
         onGreen = false;
+    }
+
+    public void ShareScore()
+    {
+        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds! in React-CurryGames");
     }
 }

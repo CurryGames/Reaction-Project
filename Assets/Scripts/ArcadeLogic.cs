@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class ArcadeLogic : MonoBehaviour {
 
-    public Text timeTxt, limitTxt, maxTime, levelTxt;
+    public Text timeTxt, limitTxt, maxTime, levelTxt, hsText;
     public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
     public LayerMask layerMask, noTargetMask;
     public BackgroundAnimation background;
+    public NativeShare nativeShare;
 
     private float currentTime;
     private float limitTime;
@@ -22,6 +23,12 @@ public class ArcadeLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
+        /*if (PlayerPrefs.GetFloat("ArcadeHS") == null)
+        {
+            PlayerPrefs.SetFloat("ArcadeHS", 0);
+
+        }*/
+
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         playing = false;
         currentTime = 0;
@@ -31,7 +38,8 @@ public class ArcadeLogic : MonoBehaviour {
         limitSlider.maxValue = limitTime;
         limitSlider.value = limitSlider.maxValue;
         levelTxt.text = "Level " + level.ToString();
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -103,6 +111,14 @@ public class ArcadeLogic : MonoBehaviour {
     {
         if (defeatCanvas.activeSelf == false) defeatCanvas.SetActive(true);
         maxTime.text = "You lasted " + currentTime.ToString("00.00") + " seconds!";
+
+        if (PlayerPrefs.GetFloat("ArcadeHS") < currentTime)
+        {
+            PlayerPrefs.SetFloat("ArcadeHS", currentTime);
+        }
+
+        hsText.text = "Best Time: " + PlayerPrefs.GetFloat("ArcadeHS").ToString();
+
     }
 
     public void Reload()
@@ -123,6 +139,11 @@ public class ArcadeLogic : MonoBehaviour {
             TargetClicked();
         }
         
+    }
+
+    public void ShareScore()
+    {
+        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds! in React-CurryGames");
     }
 
 }

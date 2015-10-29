@@ -12,8 +12,8 @@ public class ObjectsArray : MonoBehaviour {
     public float currentTime, maxTime, maxRan, minRan;
     public int maxTarget;
     public Transform top, bot, left, rigth;
-    private Vector3 m_position;
-    private Vector3[] m_positionArray;
+    //private Vector3 m_position;
+    //private Vector3[] m_positionArray;
     public int lifes = 3;
     public Vector2 wordSize = new Vector2 (8,4);
     public GameObject[] lifesImage = new GameObject[3];
@@ -23,7 +23,7 @@ public class ObjectsArray : MonoBehaviour {
         maxTarget = (int)(wordSize.x * wordSize.y);
         m_targetArray = new GameObject[(int)wordSize.x, (int)wordSize.y];
         destroyParticlesArray = new ParticleSystem[maxTarget];
-        m_positionArray = new Vector3[maxTarget];
+        //m_positionArray = new Vector3[maxTarget];
         CreateArray(m_targetArray, target, destroyParticlesArray, destroyParticles);
         //ActivateTarget();
         minRan = 0.45f;
