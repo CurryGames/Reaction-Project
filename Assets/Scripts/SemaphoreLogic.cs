@@ -23,7 +23,7 @@ public class SemaphoreLogic : MonoBehaviour {
         marks = new float[5];
         redSignal.SetActive(true);
         greenSignal.SetActive(false);
-        maxTime = Random.Range(1.0f, 2.0f);
+        maxTime = Random.Range(1.0f, 3.5f);
 	}
 	
 	// Update is called once per frame
@@ -34,7 +34,7 @@ public class SemaphoreLogic : MonoBehaviour {
 
             case SemaphoreState.START:
             {
-                if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
+                if ((Input.GetButtonDown("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
                 {
                     startCanvas.SetActive(false);
                     state = SemaphoreState.PLAYING;
@@ -45,8 +45,8 @@ public class SemaphoreLogic : MonoBehaviour {
             {
                 if (!onGreen)
                 {
-                    currentTime += Time.deltaTime;
-                    if (currentTime >= maxTime)
+                    currentTime += Time.deltaTime*1000;
+                    if (currentTime >= maxTime * 1000)
                     {
                         onGreen = true;
                         currentTime = 0;
@@ -57,7 +57,7 @@ public class SemaphoreLogic : MonoBehaviour {
                 }
                 else
                 {
-                    reactionTime += Time.deltaTime;
+                    reactionTime += Time.deltaTime * 1000;
                 }
 
                 if (Input.GetButtonDown("Fire1"))
@@ -83,16 +83,18 @@ public class SemaphoreLogic : MonoBehaviour {
                     }
                     totatlReaction /= 5;
                     redSignal.SetActive(false);
-                    totalReactionText.text = "Total: " + totatlReaction.ToString("0.00") + "S";
+                    totalReactionText.text = "Average: " + totatlReaction.ToString("000") + "ms";
                     state = SemaphoreState.DEFEAT;
                 }
                 else
                     {
                         waitingCanvas.SetActive(true);
-                        waitingText.text = "total sore:\n" + reactionTime.ToString("0.00");
-                        if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
+                        waitingText.text = "Your time:\n" + reactionTime.ToString("000") + "ms";
+                        if ((Input.GetButtonDown("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
                         {
                             waitingCanvas.SetActive(false);
+                            currentTime = 0;
+
                             state = SemaphoreState.PLAYING;
                         }
                     }
@@ -104,7 +106,7 @@ public class SemaphoreLogic : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
 	}
 
     public void Reload()
@@ -124,16 +126,17 @@ public class SemaphoreLogic : MonoBehaviour {
         }
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
         {
-            reactionTime = 2.0f;
+            reactionTime = 500;
         }
 
         int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
-        marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("0.00") + "S";
+        marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("000");
         lifes++;
         redSignal.SetActive(true);
         greenSignal.SetActive(false);
-        maxTime = Random.Range(1.0f, 2.0f);
+        maxTime = Random.Range(1.0f, 3.5f);
+
         state = SemaphoreState.WAITING;
         onGreen = false;
     }

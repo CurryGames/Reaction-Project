@@ -8,6 +8,7 @@ public class ArcadeLogic : MonoBehaviour {
     public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
     public LayerMask layerMask, noTargetMask;
+    public BackgroundAnimation background;
 
     private float currentTime;
     private float limitTime;
@@ -17,7 +18,6 @@ public class ArcadeLogic : MonoBehaviour {
     private int level;
     public bool playing;
     public bool defeat;
-    public float pitchMod, pitchRate;
 
 	// Use this for initialization
 	void Start () 
@@ -31,8 +31,6 @@ public class ArcadeLogic : MonoBehaviour {
         limitSlider.maxValue = limitTime;
         limitSlider.value = limitSlider.maxValue;
         levelTxt.text = "Level " + level.ToString();
-        pitchMod = 0;
-        pitchRate = 1;
 	}
 	
 	// Update is called once per frame
@@ -41,7 +39,12 @@ public class ArcadeLogic : MonoBehaviour {
         if (playing)
         {
             currentTime += Time.deltaTime;
-            //limitSlider.value -= Time.deltaTime;
+            if (currentTime >= 0)
+            {
+                audioManager.AccelerateSound();
+                if (background.maxTime >= 0.5f) background.maxTime -= 0.0002f;
+            }
+
             levelTimer += Time.deltaTime;
             if (targetArray.lifes <= 0)
             {
@@ -68,8 +71,6 @@ public class ArcadeLogic : MonoBehaviour {
                 Clicking(ray);
             }
 
-            pitchMod += 0.0083f * Time.deltaTime;
-            pitchRate = 1 + pitchMod;
 
         }
 
@@ -80,7 +81,7 @@ public class ArcadeLogic : MonoBehaviour {
             targetArray.playing = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
         
 	}
 
