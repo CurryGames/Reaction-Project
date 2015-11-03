@@ -3,9 +3,11 @@ using System.Collections;
 
 public class MenuManager : MonoBehaviour {
 
+    LoadingScreen loadingScreen;
+
 	// Use this for initialization
 	void Start () {
-	
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
 	}
 	
 	// Update is called once per frame
@@ -20,18 +22,14 @@ public class MenuManager : MonoBehaviour {
 
     public void LevelAim()
     {
-        Application.LoadLevel(2);
+        loadingScreen.loadLevel2 = true;
     }
 
     public void LevelReaction()
     {
-        Application.LoadLevel(1);
+        loadingScreen.loadLevel1 = true;
     }
 
-    public void LevelColor()
-    {
-        Application.LoadLevel(3);
-    }
 
     public void OptionsButton()
     {
