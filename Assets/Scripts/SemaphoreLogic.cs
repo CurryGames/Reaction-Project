@@ -8,7 +8,7 @@ public class SemaphoreLogic : MonoBehaviour {
 
 
     public SemaphoreState state;
-    public float currentTime, maxTime, reactionTime, totatlReaction;
+    public float currentTime, maxTime, reactionTime, totalReaction;
     public int lifes;
     public GameObject redSignal, greenSignal, startCanvas, defeatCanvas, waitingCanvas;
     public bool onGreen;
@@ -22,6 +22,10 @@ public class SemaphoreLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         marks = new float[5];
+        for (int i = 0; i < 5; i++)
+        {
+            marksText[i].text = i + 1 +  ". -";
+        }
         redSignal.SetActive(true);
         greenSignal.SetActive(false);
         maxTime = Random.Range(1.0f, 3.5f);
@@ -46,6 +50,7 @@ public class SemaphoreLogic : MonoBehaviour {
             {
                 if (!onGreen)
                 {
+                    if (!redSignal.activeInHierarchy) redSignal.SetActive(true);
                     currentTime += Time.deltaTime*1000;
                     if (currentTime >= maxTime * 1000)
                     {
@@ -75,27 +80,27 @@ public class SemaphoreLogic : MonoBehaviour {
             }
             case SemaphoreState.WAITING:
             {
+                if (redSignal.activeInHierarchy) redSignal.SetActive(false);
                 if (lifes > 4)
                 {
                     defeatCanvas.SetActive(true);
                     for (int i = 0; i <= 4; i++)
                     {
-                        totatlReaction += marks[i];
+                        totalReaction += marks[i];
                     }
-                    totatlReaction /= 5;
-                    redSignal.SetActive(false);
-                    totalReactionText.text = "Average: " + totatlReaction.ToString("000") + "ms";
+                    totalReaction /= 5;
+                    totalReactionText.text = "Average: " + totalReaction.ToString("000") + " ms";
                     state = SemaphoreState.DEFEAT;
                 }
                 else
                     {
+                        
                         waitingCanvas.SetActive(true);
-                        waitingText.text = "Your time:\n" + reactionTime.ToString("000") + "ms";
+                        waitingText.text = "Your time:\n" + reactionTime.ToString("000") + " ms";
                         if ((Input.GetButtonDown("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
                         {
                             waitingCanvas.SetActive(false);
                             currentTime = 0;
-
                             state = SemaphoreState.PLAYING;
                         }
                     }
@@ -103,12 +108,12 @@ public class SemaphoreLogic : MonoBehaviour {
             }
             case SemaphoreState.DEFEAT:
             {
-                    if (PlayerPrefs.GetFloat("SemaphoreHS") < currentTime)
+                    if (PlayerPrefs.GetFloat("SemaphoreHS") < totalReaction)
                     {
-                        PlayerPrefs.SetFloat("SemaphoreHS", currentTime);
+                        PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
                     }
 
-                    hsReaction.text = "Best Time: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString();
+                    hsReaction.text = "Best Time: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
                     break;
             }
         }
@@ -117,6 +122,11 @@ public class SemaphoreLogic : MonoBehaviour {
 	}
 
     public void Reload()
+    {
+        Application.LoadLevel(1);
+    }
+
+    public void Menu()
     {
         Application.LoadLevel(0);
     }
@@ -140,7 +150,7 @@ public class SemaphoreLogic : MonoBehaviour {
         marks[lifes] = reactionTime;
         marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("000");
         lifes++;
-        redSignal.SetActive(true);
+        //redSignal.SetActive(true);
         greenSignal.SetActive(false);
         maxTime = Random.Range(1.0f, 3.5f);
 
