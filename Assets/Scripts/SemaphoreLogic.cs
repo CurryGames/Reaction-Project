@@ -60,21 +60,38 @@ public class SemaphoreLogic : MonoBehaviour {
                         redSignal.SetActive(false);
                         greenSignal.SetActive(true);
                     }
-                }
+
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                        audioManager.Play(audioManager.laser, audiSor, 1.0f);
+                        reactionTime = 500;
+                        Clicking();
+                    }
+                    else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+                        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                        audioManager.Play(audioManager.laser, audiSor, 1.0f);
+                        reactionTime = 500;
+                        Clicking();
+                    }
+
+                    }
                 else
                 {
                     reactionTime += Time.deltaTime * 1000;
-                }
-
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    Clicking(ray);
-                }
-                else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                    Clicking(ray);
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                        audioManager.Play(audioManager.laser, audiSor, 1.0f);
+                        Clicking();
+                    }
+                    else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+                        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                        audioManager.Play(audioManager.laser, audiSor, 1.0f);
+                        Clicking();
+                    }
                 }
                 break;
             }
@@ -131,20 +148,8 @@ public class SemaphoreLogic : MonoBehaviour {
         Application.LoadLevel(0);
     }
 
-    void Clicking(Ray ray)
+    void Clicking()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetMask))
-        {
-            AudioSource audiSor = gameObject.AddComponent<AudioSource>();
-            audioManager.Play(audioManager.laser, audiSor, 1.0f);
-        }
-        else if (Physics.Raycast(ray, out hit, Mathf.Infinity, noTargetMask))
-        {
-            reactionTime = 500;
-        }
 
         int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
