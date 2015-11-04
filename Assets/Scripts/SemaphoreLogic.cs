@@ -64,7 +64,7 @@ public class SemaphoreLogic : MonoBehaviour {
                     if (Input.GetButtonDown("Fire1"))
                     {
                         AudioSource audiSor = gameObject.AddComponent<AudioSource>();
-                        audioManager.Play(audioManager.laser, audiSor, 1.0f);
+                        audioManager.Play(audioManager.error, audiSor, 1.0f);
                         reactionTime = 500;
                         Clicking();
                     }

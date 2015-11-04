@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioClip laser;
+    public AudioClip laser, error;
     private AudioSource audioSor;
     private float myPitch;
     public bool acSound;
