@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class ArcadeLogic : MonoBehaviour {
 
     public Text timeTxt, limitTxt, maxTime, levelTxt, hsText;
-    public Slider limitSlider;
     public GameObject defeatCanvas, startCanvas;
     public LayerMask layerMask, noTargetMask;
     public BackgroundAnimation background;
     public NativeShare nativeShare;
 
+    private float arcadePlayedNum, arcadeTargetsNum, arcadeAverage;
     private float currentTime;
     private float limitTime;
     private AudioManager audioManager;
@@ -28,6 +28,10 @@ public class ArcadeLogic : MonoBehaviour {
             PlayerPrefs.SetFloat("ArcadeHS", 0);
 
         }*/
+        arcadePlayedNum = PlayerPrefs.GetFloat("ArcadePlayedNum");
+        arcadeAverage = PlayerPrefs.GetFloat("ArcadeAverage");
+        arcadeTargetsNum = PlayerPrefs.GetFloat("ArcadeTargetsNum");
+        arcadePlayedNum++;
 
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         playing = false;
@@ -35,8 +39,6 @@ public class ArcadeLogic : MonoBehaviour {
         level = 1;
         limitTime = 1.5f;
         levelTimer = 0;
-        limitSlider.maxValue = limitTime;
-        limitSlider.value = limitSlider.maxValue;
         levelTxt.text = "Level " + level.ToString();
         
     }
@@ -95,14 +97,13 @@ public class ArcadeLogic : MonoBehaviour {
 
     void TargetClicked()
     {
-        limitSlider.value = limitSlider.maxValue;
+        arcadeTargetsNum++;
     }
 
     void UpdateLevel()
     {
         level++;
         limitTime *= 0.95f;
-        limitSlider.maxValue = limitTime;
         levelTimer = 0;
         levelTxt.text = "Level " + level.ToString();
     }
@@ -116,6 +117,10 @@ public class ArcadeLogic : MonoBehaviour {
         {
             PlayerPrefs.SetFloat("ArcadeHS", currentTime);
         }
+        arcadeAverage = (arcadeAverage + currentTime) / arcadePlayedNum;
+        PlayerPrefs.SetFloat("ArcadeAverage", arcadeAverage);
+        PlayerPrefs.SetFloat("ArcadePlayedNum", arcadePlayedNum);
+        PlayerPrefs.SetFloat("ArcadeTargetsNum", arcadeTargetsNum);
 
         hsText.text = "Best Time: " + PlayerPrefs.GetFloat("ArcadeHS").ToString();
 

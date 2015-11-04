@@ -16,6 +16,7 @@ public class SemaphoreLogic : MonoBehaviour {
     public AudioManager audioManager;
     public NativeShare nativeShare;
     public float[] marks;
+    public float reactPlayedNum, reactAverage;
     public Text[] marksText = new Text[5];
     public Text totalReactionText, waitingText, hsReaction;
 
@@ -26,6 +27,9 @@ public class SemaphoreLogic : MonoBehaviour {
         {
             marksText[i].text = i + 1 +  ". -";
         }
+        reactAverage = PlayerPrefs.GetFloat("ReactAverage");
+        reactPlayedNum = PlayerPrefs.GetFloat("ReactPlayedNum");
+        reactPlayedNum++;
         redSignal.SetActive(true);
         greenSignal.SetActive(false);
         maxTime = Random.Range(1.0f, 3.5f);
@@ -107,6 +111,7 @@ public class SemaphoreLogic : MonoBehaviour {
                     }
                     totalReaction /= 5;
                     totalReactionText.text = "Average: " + totalReaction.ToString("000") + " ms";
+                        reactAverage = (reactAverage + totalReaction) / reactPlayedNum;
                     state = SemaphoreState.DEFEAT;
                 }
                 else
@@ -129,6 +134,9 @@ public class SemaphoreLogic : MonoBehaviour {
                     {
                         PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
                     }
+
+                    PlayerPrefs.SetFloat("ReactAverage",reactAverage);
+                    PlayerPrefs.SetFloat("ReactPlayedNum", reactPlayedNum);
 
                     hsReaction.text = "Best Time: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
                     break;

@@ -4,15 +4,29 @@ using System.Collections;
 public class MenuManager : MonoBehaviour {
 
     LoadingScreen loadingScreen;
+    bool stats;
+    public GameObject menuCanvas, statsCanvas;
 
 	// Use this for initialization
 	void Start () {
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+
+        if (!stats)
+        {
+            menuCanvas.SetActive(true);
+            statsCanvas.SetActive(false);
+        }
+        else
+        {
+            menuCanvas.SetActive(false);
+            statsCanvas.SetActive(true);
+        }
     }
 
     public void PlayButton() 
@@ -31,8 +45,8 @@ public class MenuManager : MonoBehaviour {
     }
 
 
-    public void OptionsButton()
+    public void StatsButton()
     {
-
+        stats = !stats;
     }
 }
