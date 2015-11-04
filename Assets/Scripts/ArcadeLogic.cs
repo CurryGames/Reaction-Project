@@ -47,7 +47,7 @@ public class ArcadeLogic : MonoBehaviour {
         if (playing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime >= 0)
+            if (currentTime >= 25)
             {
                 audioManager.AccelerateSound();
                 if (background.maxTime >= 0.5f) background.maxTime -= 0.0002f;
