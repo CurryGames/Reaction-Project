@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 using System.Collections;
 
 public class MenuManager : MonoBehaviour {
