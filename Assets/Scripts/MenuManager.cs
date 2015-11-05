@@ -11,6 +11,9 @@ public class MenuManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Social.localUser.Authenticate((bool success) => {
+            // handle success or failure
+        });
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
 	}
 

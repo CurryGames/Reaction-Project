@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using ChartboostSDK;
 using System.Collections;
 
 public class SemaphoreLogic : MonoBehaviour {
@@ -27,6 +28,7 @@ public class SemaphoreLogic : MonoBehaviour {
         {
             marksText[i].text = i + 1 +  ". -";
         }
+        Chartboost.cacheInterstitial(CBLocation.Default);
         reactAverage = PlayerPrefs.GetFloat("ReactAverage");
         reactPlayedNum = PlayerPrefs.GetFloat("ReactPlayedNum");
         reactPlayedNum++;
@@ -134,6 +136,8 @@ public class SemaphoreLogic : MonoBehaviour {
                     {
                         PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
                     }
+
+                    Chartboost.showInterstitial(CBLocation.Default);
 
                     PlayerPrefs.SetFloat("ReactAverage",reactAverage);
                     PlayerPrefs.SetFloat("ReactPlayedNum", reactPlayedNum);
