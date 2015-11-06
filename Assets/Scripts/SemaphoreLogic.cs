@@ -114,7 +114,7 @@ public class SemaphoreLogic : MonoBehaviour {
                     }
                     totalReaction /= 5;
                     totalReactionText.text = "Average: " + totalReaction.ToString("000") + " ms";
-                        reactAverage = (reactAverage + totalReaction) / reactPlayedNum;
+                        reactAverage = ((reactAverage*(reactPlayedNum - 1)) + totalReaction) / reactPlayedNum;
                     state = SemaphoreState.DEFEAT;
                 }
                 else
@@ -122,6 +122,26 @@ public class SemaphoreLogic : MonoBehaviour {
                         
                         waitingCanvas.SetActive(true);
                         waitingText.text = "Your time:\n" + reactionTime.ToString("000") + " ms";
+                        /*if (PlayerPrefs.GetFloat("SemaphoreHS") > reactionTime)
+                        {
+                            PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+
+                            Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                            {
+                                // handle success or failure
+                            });
+                        }
+                        else if (PlayerPrefs.GetFloat("SemaphoreHS") == 0)
+                        {
+                            PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+
+                            Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                            {
+                                // handle success or failure
+                            });
+                        }*/  
+
+
                         if ((Input.GetButtonDown("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
                         {
                             waitingCanvas.SetActive(false);
@@ -133,7 +153,26 @@ public class SemaphoreLogic : MonoBehaviour {
             }
             case SemaphoreState.DEFEAT:
             {
-                    if (PlayerPrefs.GetFloat("SemaphoreHS") > totalReaction)
+
+                if (PlayerPrefs.GetFloat("SemaphoreHS") > reactionTime)
+                {
+                    PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+
+                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                    {
+                        // handle success or failure
+                    });
+                }
+                else if (PlayerPrefs.GetFloat("SemaphoreHS") == 0)
+                {
+                    PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+
+                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                    {
+                        // handle success or failure
+                    });
+                }
+                    /*if (PlayerPrefs.GetFloat("SemaphoreHS") > totalReaction)
                     {
                         PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
 
@@ -148,7 +187,7 @@ public class SemaphoreLogic : MonoBehaviour {
                         Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) => {
                             // handle success or failure
                         });
-                    }
+                    }*/
 
 
 
