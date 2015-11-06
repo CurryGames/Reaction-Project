@@ -28,11 +28,11 @@ public class StatsLogic : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        reactBest.text = "Best: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("0.00") + " ms";
-        reactAverage.text = "Average: " + PlayerPrefs.GetFloat("ReactAverage").ToString("0.00") + " ms";
-        aimBest.text = "MaxTime: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("0.0") + " s";
+        reactBest.text = "Best: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
+        reactAverage.text = "Average: " + PlayerPrefs.GetFloat("ReactAverage").ToString("000") + " ms";
+        aimBest.text = "MaxTime: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00") + " s";
         aimTargets.text = "Targets: " + PlayerPrefs.GetFloat("ArcadeTargetsNum").ToString("0");
-        aimAverage.text = "Average: " + PlayerPrefs.GetFloat("ArcadeAverage").ToString("0.0") + " s";
+        aimAverage.text = "Average: " + PlayerPrefs.GetFloat("ArcadeAverage").ToString("00.00") + " s";
 
         if (scaling)
         {
@@ -56,7 +56,7 @@ public class StatsLogic : MonoBehaviour {
 
     public void Reset()
     {
-        PlayerPrefs.SetFloat("SemaphoreHS", 0);
+        PlayerPrefs.SetFloat("SemaphoreHS", 000);
         PlayerPrefs.SetFloat("ReactAverage", 0);
         PlayerPrefs.SetFloat("ReactPlayedNum", 0);
         PlayerPrefs.SetFloat("ArcadeHS", 0);
