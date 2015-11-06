@@ -68,7 +68,7 @@ public class StatsLogic : MonoBehaviour {
 
     public void Ranking()
     {
-        Social.ShowAchievementsUI();
+        Social.ShowLeaderboardUI();
     }
 
     public void Share()

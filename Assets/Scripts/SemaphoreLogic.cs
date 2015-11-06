@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using ChartboostSDK;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 using System.Collections;
 
 public class SemaphoreLogic : MonoBehaviour {

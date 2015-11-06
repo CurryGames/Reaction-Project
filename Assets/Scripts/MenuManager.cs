@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour {
         PlayGamesPlatform.InitializeInstance(config);
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
-
+        
         Social.localUser.Authenticate((bool success) => {
             // handle success or failure
         });
@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PlayGamesPlatform.Instance.SignOut();
+            //PlayGamesPlatform.Instance.SignOut();
             Application.Quit();
         }
         

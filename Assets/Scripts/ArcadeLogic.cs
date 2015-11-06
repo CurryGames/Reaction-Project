@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class ArcadeLogic : MonoBehaviour {
 
@@ -116,11 +118,20 @@ public class ArcadeLogic : MonoBehaviour {
         if (PlayerPrefs.GetFloat("ArcadeHS") < currentTime)
         {
             PlayerPrefs.SetFloat("ArcadeHS", currentTime);
+
+            Social.ReportScore((long)PlayerPrefs.GetFloat("ArcadeHS"), "CgkI2s7ZnpIMEAIQCA", (bool success) => {
+                // handle success or failure
+            });
+
         }
-        arcadeAverage = (arcadeAverage + currentTime) / arcadePlayedNum;
+
+        arcadeAverage = (arcadeAverage* (arcadePlayedNum-1) + currentTime) / arcadePlayedNum;
+
         PlayerPrefs.SetFloat("ArcadeAverage", arcadeAverage);
         PlayerPrefs.SetFloat("ArcadePlayedNum", arcadePlayedNum);
         PlayerPrefs.SetFloat("ArcadeTargetsNum", arcadeTargetsNum);
+
+        
 
         hsText.text = "Best Time: " + PlayerPrefs.GetFloat("ArcadeHS").ToString();
 
