@@ -26,8 +26,8 @@ public class ObjectsArray : MonoBehaviour {
         //m_positionArray = new Vector3[maxTarget];
         CreateArray(m_targetArray, target, destroyParticlesArray, destroyParticles);
         //ActivateTarget();
-        minRan = 0.45f;
-        maxRan = 0.8f;
+        minRan = 0.35f;
+        maxRan = 0.6f;
         maxTime = Random.Range(minRan, maxRan);
     }
 	
@@ -46,8 +46,8 @@ public class ObjectsArray : MonoBehaviour {
 
             if (lifes <= 0) playing = false;
 
-            if (minRan >= 0.2f) minRan -= 0.005f * Time.deltaTime;
-            if (maxRan >= 0.2) maxRan -= 0.007f * Time.deltaTime;
+            if (minRan >= 0.15f) minRan -= 0.005f * Time.deltaTime;
+            if (maxRan >= 0.2f) maxRan -= 0.007f * Time.deltaTime;
         }
 	}
 

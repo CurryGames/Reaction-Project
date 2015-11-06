@@ -49,10 +49,10 @@ public class ArcadeLogic : MonoBehaviour {
         if (playing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime >= 25)
+            if (currentTime >= 20)
             {
                 audioManager.AccelerateSound();
-                if (background.maxTime >= 0.5f) background.maxTime -= 0.0002f;
+                if (background.maxTime >= 0.5f) background.maxTime -= 0.0004f;
             }
 
             levelTimer += Time.deltaTime;
@@ -84,7 +84,7 @@ public class ArcadeLogic : MonoBehaviour {
 
         }
 
-        if ((Input.GetButton("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && startCanvas.activeInHierarchy)
+        if ((Input.GetButton("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && startCanvas.activeInHierarchy)
         {
             startCanvas.SetActive(false);
             playing = true;
@@ -126,7 +126,12 @@ public class ArcadeLogic : MonoBehaviour {
 
     }
 
-    public void Reload()
+    public void LevelReload()
+    {
+        Application.LoadLevel(2);
+    }
+
+    public void LevelMenu()
     {
         Application.LoadLevel(0);
     }
