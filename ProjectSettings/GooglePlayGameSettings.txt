@@ -1,1 +1,6 @@
 lastUpgrade=00926
+proj.AppId=417213081434
+proj.ConstantsClassName=React.GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3cstring+name%3d%22app_id%22%3e417213081434%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22package_name%22%3ecom.CurryGames.React%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_oro%22%3eCgkI2s7ZnpIMEAIQAQ%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_plata%22%3eCgkI2s7ZnpIMEAIQBA%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_bronce%22%3eCgkI2s7ZnpIMEAIQBQ%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_platino%22%3eCgkI2s7ZnpIMEAIQBg%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_diamante%22%3eCgkI2s7ZnpIMEAIQBw%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22leaderboard_reactiontest%22%3eCgkI2s7ZnpIMEAIQAg%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22leaderboard_aimbooster%22%3eCgkI2s7ZnpIMEAIQAw%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=
+android.SetupDone=true

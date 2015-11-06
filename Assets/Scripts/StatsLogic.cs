@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 using System.Collections;
 
 public class StatsLogic : MonoBehaviour {
@@ -9,6 +12,7 @@ public class StatsLogic : MonoBehaviour {
     public bool scaling;
     public GameObject statButtons;
     private Transform m_myTransform;
+    private NativeShare nativeShare;
     public Text reactBest, reactAverage, aimBest, aimTargets, aimAverage;
 
 	// Use this for initialization
@@ -17,13 +21,15 @@ public class StatsLogic : MonoBehaviour {
         m_myTransform = transform;
         initScale = new Vector2(0, 0);
 	    finalScale = transform.localScale;
+        m_myTransform.localScale = initScale;
+        nativeShare = GetComponent<NativeShare>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        reactBest.text = "Best: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString() + " ms";
-        reactAverage.text = "Average: " + PlayerPrefs.GetFloat("ReactAverage").ToString() + " ms";
+        reactBest.text = "Best: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("0.00") + " ms";
+        reactAverage.text = "Average: " + PlayerPrefs.GetFloat("ReactAverage").ToString("0.00") + " ms";
         aimBest.text = "MaxTime: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("0.0") + " s";
         aimTargets.text = "Targets: " + PlayerPrefs.GetFloat("ArcadeTargetsNum").ToString("0");
         aimAverage.text = "Average: " + PlayerPrefs.GetFloat("ArcadeAverage").ToString("0.0") + " s";
@@ -60,8 +66,19 @@ public class StatsLogic : MonoBehaviour {
         PlayerPrefs.SetFloat("ArcadePlayedNum", 0);
     }
 
-    void OnEnable()
+    public void Ranking()
     {
+        PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkI2s7ZnpIMEAIQAg ");
+    }
+
+    public void Share()
+    {
+        nativeShare.ShareScreenshotWithText("Look my Stats in React-CurryGames");
+    }
+
+    void OnDisable()
+    {
+        m_myTransform.localScale = initScale;
         scaling = true;
     }
 }
