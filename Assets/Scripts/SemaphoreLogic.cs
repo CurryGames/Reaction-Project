@@ -158,7 +158,7 @@ public class SemaphoreLogic : MonoBehaviour {
                 {
                     PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
 
-                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg", (bool success) =>
                     {
                         // handle success or failure
                     });
@@ -167,29 +167,12 @@ public class SemaphoreLogic : MonoBehaviour {
                 {
                     PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
 
-                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
+                    Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg", (bool success) =>
                     {
                         // handle success or failure
                     });
                 }
-                    /*if (PlayerPrefs.GetFloat("SemaphoreHS") > totalReaction)
-                    {
-                        PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
-
-                        Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) => {
-                            // handle success or failure
-                        });
-                    }
-                    else if (PlayerPrefs.GetFloat("SemaphoreHS") == 0)
-                    {
-                        PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
-
-                        Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) => {
-                            // handle success or failure
-                        });
-                    }*/
-
-
+                 
 
                     PlayerPrefs.SetFloat("ReactAverage",reactAverage);
                     PlayerPrefs.SetFloat("ReactPlayedNum", reactPlayedNum);

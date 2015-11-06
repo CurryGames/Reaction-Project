@@ -68,7 +68,7 @@ public class StatsLogic : MonoBehaviour {
 
     public void Ranking()
     {
-        PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkI2s7ZnpIMEAIQAg ");
+        Social.ShowAchievementsUI();
     }
 
     public void Share()
