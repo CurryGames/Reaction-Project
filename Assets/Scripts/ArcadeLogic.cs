@@ -61,6 +61,7 @@ public class ArcadeLogic : MonoBehaviour {
             if (targetArray.lifes <= 0)
             {
                 playing = false;
+                audioManager.acSound = false;
                 Defeat();
             }
 
