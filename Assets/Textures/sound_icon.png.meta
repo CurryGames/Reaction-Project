@@ -1,0 +1,106 @@
+fileFormatVersion: 2
+guid: 7e9dc852ea05ac041af2e38673e8a10f
+timeCreated: 1447062840
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sound_icon_0
+    21300002: sound_icon_1
+    21300004: sound_icon_2
+    21300006: sound_icon_3
+    21300008: sound_icon_4
+    21300010: sound_icon_5
+    21300012: sound_icon_6
+    21300014: sound_icon_7
+    21300016: sound_icon_8
+    21300018: sound_icon_9
+    21300020: sound_icon_10
+    21300022: sound_icon_11
+    21300024: sound_icon_12
+    21300026: sound_icon_13
+    21300028: sound_icon_14
+    21300030: sound_icon_15
+    21300032: sound_icon_16
+    21300034: sound_icon_17
+    21300036: sound_icon_18
+    21300038: sound_icon_19
+    21300040: sound_icon_20
+    21300042: sound_icon_21
+    21300044: sound_icon_22
+    21300046: sound_icon_23
+    21300048: sound_icon_24
+    21300050: sound_icon_25
+    21300052: sound_icon_26
+    21300054: sound_icon_27
+    21300056: sound_icon_28
+    21300058: sound_icon_29
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: sound_icon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sound_icon_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

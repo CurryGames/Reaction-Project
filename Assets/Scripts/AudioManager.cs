@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour {
             audioSor.pitch += 0.0083f * Time.deltaTime;
             if (audioSor.pitch >= 2.5f) acSound = false;
         }
+
 	}
 
     // FUNCION PLAY: REPRODUCE UN SONIDO 

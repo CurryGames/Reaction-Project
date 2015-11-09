@@ -12,6 +12,7 @@ public class LoadingScreen : MonoBehaviour {
     //private DataLogic dataLogic;
     public float tempInit = 1f;
     public Color color;
+    public bool soundON;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +45,20 @@ public class LoadingScreen : MonoBehaviour {
         }
 
 	}
+
+    public void SoundButton()
+    {
+        if (soundON)
+        {
+            AudioListener.pause = true;
+            soundON = false;
+        }
+        else
+        {
+            AudioListener.pause = false;
+            soundON = true;
+        }
+    }
 
 
     void loadingNexttLevel()
