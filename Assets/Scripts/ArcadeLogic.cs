@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms;
 
 public class ArcadeLogic : MonoBehaviour {
 
-    public Text timeTxt, limitTxt, maxTime, levelTxt, hsText;
+    public Text timeTxt, maxTime, recordTxt, hsText;
     public GameObject defeatCanvas, startCanvas;
     public LayerMask layerMask, noTargetMask;
     public BackgroundAnimation background;
@@ -14,11 +14,8 @@ public class ArcadeLogic : MonoBehaviour {
 
     private float arcadePlayedNum, arcadeTargetsNum, arcadeAverage;
     private float currentTime;
-    private float limitTime;
     private AudioManager audioManager;
-    public float levelTimer;
     public ObjectsArray targetArray;
-    private int level;
     public bool playing;
     public bool defeat;
 
@@ -38,10 +35,7 @@ public class ArcadeLogic : MonoBehaviour {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         playing = false;
         currentTime = 0;
-        level = 1;
-        limitTime = 1.5f;
-        levelTimer = 0;
-        levelTxt.text = "Level " + level.ToString();
+        recordTxt.text = "Record: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00");
         
     }
 	
@@ -57,7 +51,6 @@ public class ArcadeLogic : MonoBehaviour {
                 if (background.maxTime >= 0.5f) background.maxTime -= 0.0004f;
             }
 
-            levelTimer += Time.deltaTime;
             if (targetArray.lifes <= 0)
             {
                 playing = false;
@@ -65,11 +58,8 @@ public class ArcadeLogic : MonoBehaviour {
                 Defeat();
             }
 
-            if (levelTimer >= 6) UpdateLevel();
-    
-
+            recordTxt.text = "Record: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00"); 
             timeTxt.text = "Time: " + currentTime.ToString("00.00");
-            limitTxt.text = "Limit: " + limitTime.ToString("0.000");
 
             if (Input.GetButtonDown("Fire1"))
             {
@@ -102,15 +92,7 @@ public class ArcadeLogic : MonoBehaviour {
     {
         arcadeTargetsNum++;
     }
-
-    void UpdateLevel()
-    {
-        level++;
-        limitTime *= 0.95f;
-        levelTimer = 0;
-        levelTxt.text = "Level " + level.ToString();
-    }
-
+        
     void Defeat()
     {
         if (defeatCanvas.activeSelf == false) defeatCanvas.SetActive(true);
@@ -120,7 +102,7 @@ public class ArcadeLogic : MonoBehaviour {
         {
             PlayerPrefs.SetFloat("ArcadeHS", currentTime);
 
-            Social.ReportScore((long)PlayerPrefs.GetFloat("ArcadeHS"), "CgkI2s7ZnpIMEAIQCA", (bool success) => {
+            Social.ReportScore((long)(currentTime*100), "CgkI2s7ZnpIMEAIQCA", (bool success) => {
                 // handle success or failure
             });
 
@@ -134,7 +116,7 @@ public class ArcadeLogic : MonoBehaviour {
 
         
 
-        hsText.text = "Best Time: " + PlayerPrefs.GetFloat("ArcadeHS").ToString();
+        hsText.text = "Best Time: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00");
 
     }
 
@@ -165,7 +147,7 @@ public class ArcadeLogic : MonoBehaviour {
 
     public void ShareScore()
     {
-        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds! in React-CurryGames");
+        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds in Reaction Booster!");
     }
 
 }

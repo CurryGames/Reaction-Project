@@ -23,6 +23,7 @@ public class LoadingScreen : MonoBehaviour {
             GetComponent<DataLogic>();*/
 
         DontDestroyOnLoad(transform.gameObject);
+
 	}
 	
 	// Update is called once per frame

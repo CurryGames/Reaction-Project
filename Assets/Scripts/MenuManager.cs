@@ -49,10 +49,6 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    public void PlayButton() 
-    {
-
-    }
 
     public void LevelAim()
     {

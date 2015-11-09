@@ -42,6 +42,12 @@ public class SemaphoreLogic : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        for (int i = 0; i < lifes; i++)
+        {
+            if (marks[i] == 500) marksText[i].color = Color.red;
+            else if (marks[i] >= 1) marksText[i].color = Color.green;
+        }
+
         switch(state)
         {
 
@@ -203,6 +209,7 @@ public class SemaphoreLogic : MonoBehaviour {
         int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
         marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("000");
+
         lifes++;
         //redSignal.SetActive(true);
         greenSignal.SetActive(false);
