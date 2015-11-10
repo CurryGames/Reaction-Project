@@ -70,7 +70,9 @@ public class SemaphoreLogic : MonoBehaviour {
                 if (!onGreen)
                 {
                     if (!redSignal.activeInHierarchy) redSignal.SetActive(true);
+
                     currentTime += Time.deltaTime*1000;
+
                     if (currentTime >= maxTime * 1000)
                     {
                         onGreen = true;
@@ -123,14 +125,15 @@ public class SemaphoreLogic : MonoBehaviour {
                         {
                             Chartboost.showInterstitial(CBLocation.Default);   
                         }
+
                         defeatCanvas.SetActive(true);
 
-                        for (int i = 1; i < 4; i++)
+                        for (int i = 0; i <= 4; i++)
                     {
                         totalReaction += marks[i];
                     }
 
-                    totalReaction /= lifes;
+                    totalReaction /= 5;
                     totalReactionText.text = "Average: " + totalReaction.ToString("000") + " ms";
                     reactAverage = ((reactAverage*(reactPlayedNum - 1)) + totalReaction) / reactPlayedNum;
                     state = SemaphoreState.DEFEAT;
@@ -180,7 +183,7 @@ public class SemaphoreLogic : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(1);
 	}
 
     public void Reload()
