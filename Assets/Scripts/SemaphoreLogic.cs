@@ -126,8 +126,7 @@ public class SemaphoreLogic : MonoBehaviour {
                     state = SemaphoreState.DEFEAT;
                 }
                 else
-                    {
-                        
+                    {                    
                         waitingCanvas.SetActive(true);
                         waitingText.text = "Your time:\n" + reactionTime.ToString("000") + " ms";
                         /*if (PlayerPrefs.GetFloat("SemaphoreHS") > reactionTime)
@@ -205,7 +204,6 @@ public class SemaphoreLogic : MonoBehaviour {
 
     void Clicking()
     {
-
         int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
         marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("000");
@@ -221,6 +219,6 @@ public class SemaphoreLogic : MonoBehaviour {
 
     public void ShareScore()
     {
-        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds! in React-CurryGames");
+        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds in Reaction Booster!");
     }
 }
