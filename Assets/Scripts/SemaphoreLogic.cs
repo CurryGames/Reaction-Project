@@ -18,6 +18,7 @@ public class SemaphoreLogic : MonoBehaviour {
     public LayerMask targetMask, noTargetMask;
     public AudioManager audioManager;
     public NativeShare nativeShare;
+    LoadingScreen loadingScreen;
     public float[] marks;
     public float reactPlayedNum, reactAverage;
     public Text[] marksText = new Text[5];
@@ -33,6 +34,10 @@ public class SemaphoreLogic : MonoBehaviour {
         Chartboost.cacheInterstitial(CBLocation.Default);
         reactAverage = PlayerPrefs.GetFloat("ReactAverage");
         reactPlayedNum = PlayerPrefs.GetFloat("ReactPlayedNum");
+
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
+        loadingScreen.showAd++;
+
         reactPlayedNum++;
         redSignal.SetActive(true);
         greenSignal.SetActive(false);
@@ -114,15 +119,20 @@ public class SemaphoreLogic : MonoBehaviour {
                 if (redSignal.activeInHierarchy) redSignal.SetActive(false);
                 if (lifes > 4)
                 {
-                        Chartboost.showInterstitial(CBLocation.Default);
+                        if(loadingScreen.showAd >= 5)
+                        {
+                            Chartboost.showInterstitial(CBLocation.Default);   
+                        }
                         defeatCanvas.SetActive(true);
-                    for (int i = 0; i <= 4; i++)
+
+                        for (int i = 1; i < 4; i++)
                     {
                         totalReaction += marks[i];
                     }
-                    totalReaction /= 5;
+
+                    totalReaction /= lifes;
                     totalReactionText.text = "Average: " + totalReaction.ToString("000") + " ms";
-                        reactAverage = ((reactAverage*(reactPlayedNum - 1)) + totalReaction) / reactPlayedNum;
+                    reactAverage = ((reactAverage*(reactPlayedNum - 1)) + totalReaction) / reactPlayedNum;
                     state = SemaphoreState.DEFEAT;
                 }
                 else
@@ -130,25 +140,6 @@ public class SemaphoreLogic : MonoBehaviour {
                         
                         waitingCanvas.SetActive(true);
                         waitingText.text = "Your time:\n" + reactionTime.ToString("000") + " ms";
-                        /*if (PlayerPrefs.GetFloat("SemaphoreHS") > reactionTime)
-                        {
-                            PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
-
-                            Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
-                            {
-                                // handle success or failure
-                            });
-                        }
-                        else if (PlayerPrefs.GetFloat("SemaphoreHS") == 0)
-                        {
-                            PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
-
-                            Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg ", (bool success) =>
-                            {
-                                // handle success or failure
-                            });
-                        }*/  
-
 
                         if ((Input.GetButtonDown("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)))
                         {
@@ -162,9 +153,9 @@ public class SemaphoreLogic : MonoBehaviour {
             case SemaphoreState.DEFEAT:
             {
 
-                if (PlayerPrefs.GetFloat("SemaphoreHS") > reactionTime)
+                if (PlayerPrefs.GetFloat("SemaphoreHS") > totalReaction)
                 {
-                    PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+                    PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
 
                     Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg", (bool success) =>
                     {
@@ -173,7 +164,7 @@ public class SemaphoreLogic : MonoBehaviour {
                 }
                 else if (PlayerPrefs.GetFloat("SemaphoreHS") == 0)
                 {
-                    PlayerPrefs.SetFloat("SemaphoreHS", reactionTime);
+                    PlayerPrefs.SetFloat("SemaphoreHS", totalReaction);
 
                     Social.ReportScore((long)totalReaction, "CgkI2s7ZnpIMEAIQAg", (bool success) =>
                     {
@@ -195,12 +186,12 @@ public class SemaphoreLogic : MonoBehaviour {
 
     public void Reload()
     {
-        Application.LoadLevel(1);
+        Application.LoadLevel(2);
     }
 
     public void Menu()
     {
-        Application.LoadLevel(0);
+        Application.LoadLevel(1);
     }
 
     void Clicking()
@@ -221,6 +212,6 @@ public class SemaphoreLogic : MonoBehaviour {
 
     public void ShareScore()
     {
-        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds! in React-CurryGames");
+        nativeShare.ShareScreenshotWithText("I lasted " + currentTime.ToString("00.00") + " seconds in Reaction Booster!");
     }
 }

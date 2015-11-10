@@ -8,6 +8,7 @@ public class LoadingScreen : MonoBehaviour {
     public float temp;
     public bool loadMenu;
     public bool loadLevel1, loadLevel2;
+    public int showAd;
     private int myLevel;
     //private DataLogic dataLogic;
     public float tempInit = 1f;
@@ -31,17 +32,17 @@ public class LoadingScreen : MonoBehaviour {
 
         if (loadMenu)
         {
-            myLevel = 0;
+            myLevel = 1;
             loadingNexttLevel();
         }
         if (loadLevel1)
         {
-            myLevel = 1;
+            myLevel = 2;
             loadingNexttLevel();
         }
         if (loadLevel2)
         {
-            myLevel = 2;
+            myLevel = 3;
             loadingNexttLevel();
         }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using ChartboostSDK;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
@@ -11,7 +12,7 @@ public class ArcadeLogic : MonoBehaviour {
     public LayerMask layerMask, noTargetMask;
     public BackgroundAnimation background;
     public NativeShare nativeShare;
-
+    LoadingScreen loadingScreen;
     private float arcadePlayedNum, arcadeTargetsNum, arcadeAverage;
     private float currentTime;
     private AudioManager audioManager;
@@ -31,6 +32,9 @@ public class ArcadeLogic : MonoBehaviour {
         arcadeAverage = PlayerPrefs.GetFloat("ArcadeAverage");
         arcadeTargetsNum = PlayerPrefs.GetFloat("ArcadeTargetsNum");
         arcadePlayedNum++;
+
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
+        loadingScreen.showAd+=2;
 
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         playing = false;
@@ -98,6 +102,11 @@ public class ArcadeLogic : MonoBehaviour {
         if (defeatCanvas.activeSelf == false) defeatCanvas.SetActive(true);
         maxTime.text = "You lasted " + currentTime.ToString("00.00") + " seconds!";
 
+        if (loadingScreen.showAd >= 5)
+        {
+            Chartboost.showInterstitial(CBLocation.Default);
+        }
+
         if (PlayerPrefs.GetFloat("ArcadeHS") < currentTime)
         {
             PlayerPrefs.SetFloat("ArcadeHS", currentTime);
@@ -122,12 +131,12 @@ public class ArcadeLogic : MonoBehaviour {
 
     public void LevelReload()
     {
-        Application.LoadLevel(2);
+        Application.LoadLevel(3);
     }
 
     public void LevelMenu()
     {
-        Application.LoadLevel(0);
+        Application.LoadLevel(1);
     }
 
     public void Clicking(Ray ray)
