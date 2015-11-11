@@ -49,6 +49,22 @@ public class ObjectsArray : MonoBehaviour {
             if (minRan >= 0.15f) minRan -= 0.005f * Time.deltaTime;
             if (maxRan >= 0.2f) maxRan -= 0.007f * Time.deltaTime;
         }
+        else
+        {
+            for (int x = 0; x < wordSize.x; x++)
+            {
+                for (int y = 0; y < wordSize.y; y++)
+                {
+
+                    if (m_targetArray[x, y].activeInHierarchy)
+                    {
+                        ActivateParticles(m_targetArray[x, y].transform.position);
+                        m_targetArray[x, y].SetActive(false);
+                    }
+
+                }
+            }
+        }
 	}
 
     void CreateArray(GameObject[,] tArray, GameObject tGameObject, ParticleSystem[] pArray, ParticleSystem pSystem)

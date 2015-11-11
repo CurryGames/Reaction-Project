@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioClip laser, error;
+    public AudioClip laser, error, explosion, bassTone;
     private AudioSource audioSor;
     private float myPitch;
     public bool acSound;
@@ -61,5 +61,10 @@ public class AudioManager : MonoBehaviour {
     public void AccelerateSound()
     {
         if (!acSound) acSound = true;
+    }
+
+    public void StopMusic()
+    {
+        audioSor.Stop();
     }
 }

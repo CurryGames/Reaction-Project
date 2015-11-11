@@ -15,6 +15,8 @@ public class ArcadeLogic : MonoBehaviour {
     LoadingScreen loadingScreen;
     private float arcadePlayedNum, arcadeTargetsNum, arcadeAverage;
     private float currentTime;
+    private float gameOverTime;
+    bool gameOverSoundDisplay;
     private AudioManager audioManager;
     public ObjectsArray targetArray;
     public bool playing;
@@ -59,6 +61,9 @@ public class ArcadeLogic : MonoBehaviour {
             {
                 playing = false;
                 audioManager.acSound = false;
+                audioManager.StopMusic();
+                AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                audioManager.Play(audioManager.explosion, audiSor, 1.0f);
                 Defeat();
             }
 
@@ -79,6 +84,17 @@ public class ArcadeLogic : MonoBehaviour {
             }
 
 
+        }
+        else if(!playing && !startCanvas.activeInHierarchy)
+        {
+            gameOverTime += Time.deltaTime;
+
+            if(gameOverTime >= audioManager.explosion.length && !gameOverSoundDisplay)
+            {
+                AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+                audioManager.PlayLoop(audioManager.bassTone, audiSor, 1.0f);
+                gameOverSoundDisplay = true;
+            }
         }
 
         if ((Input.GetButton("Fire1") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && startCanvas.activeInHierarchy)

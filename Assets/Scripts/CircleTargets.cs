@@ -6,6 +6,8 @@ public class CircleTargets : MonoBehaviour {
     ObjectsArray targetArray;
     public GameObject parentGameObject;
     private Transform m_myTransform;
+    private AudioManager audioManager;
+    private FailBackground failBackground;
     //public LayerMask layerMask;
 
     public float duration;
@@ -16,7 +18,10 @@ public class CircleTargets : MonoBehaviour {
     {
         m_myTransform = transform;
         targetArray = GameObject.FindGameObjectWithTag("Spawn").GetComponent<ObjectsArray>();
-	}
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        failBackground = GameObject.FindGameObjectWithTag("FailBackground").GetComponent<FailBackground>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -29,6 +34,10 @@ public class CircleTargets : MonoBehaviour {
             m_myTransform.localScale = new Vector3(1, 1, 1);
             targetArray.ActivateParticles(parentGameObject.transform.position);
             parentGameObject.SetActive(false);
+            AudioSource audiSor = audioManager.gameObject.AddComponent<AudioSource>();
+            if (failBackground.animActive) failBackground.ResetAnim();
+            else failBackground.animActive = true;
+            audioManager.Play(audioManager.error, audiSor, 1.0f);
         }
         /*
         if (!stoped)
