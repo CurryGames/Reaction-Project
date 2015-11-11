@@ -29,7 +29,7 @@ public class SemaphoreLogic : MonoBehaviour {
         marks = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            marksText[i].text = i + 1 +  ". -";
+            marksText[i].text = "-";
         }
         Chartboost.cacheInterstitial(CBLocation.Default);
         reactAverage = PlayerPrefs.GetFloat("ReactAverage");
@@ -49,7 +49,7 @@ public class SemaphoreLogic : MonoBehaviour {
 
         for (int i = 0; i < lifes; i++)
         {
-            if (marks[i] == 500) marksText[i].color = Color.red;
+            if (marks[i] == 999) marksText[i].color = Color.red;
             else if (marks[i] >= 1) marksText[i].color = Color.green;
         }
 
@@ -86,14 +86,14 @@ public class SemaphoreLogic : MonoBehaviour {
                     {
                         AudioSource audiSor = gameObject.AddComponent<AudioSource>();
                         audioManager.Play(audioManager.error, audiSor, 1.0f);
-                        reactionTime = 500;
+                        reactionTime = 999;
                         Clicking();
                     }
                     else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
                     {
                         AudioSource audiSor = gameObject.AddComponent<AudioSource>();
                         audioManager.Play(audioManager.laser, audiSor, 1.0f);
-                        reactionTime = 500;
+                        reactionTime = 999;
                         Clicking();
                     }
 
@@ -200,7 +200,8 @@ public class SemaphoreLogic : MonoBehaviour {
     {
         int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
-        marksText[lifes].text = thisMark.ToString() + ". " + reactionTime.ToString("000");
+        marksText[lifes].text = reactionTime.ToString("000");
+        AnimateNumbers();
 
         lifes++;
         //redSignal.SetActive(true);
@@ -209,6 +210,11 @@ public class SemaphoreLogic : MonoBehaviour {
 
         state = SemaphoreState.WAITING;
         onGreen = false;
+    }
+
+    void AnimateNumbers()
+    {
+        marksText[lifes].GetComponent<Animator>().SetTrigger("scored");
     }
 
     public void ShareScore()

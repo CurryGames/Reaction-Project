@@ -61,6 +61,10 @@ public class MenuManager : MonoBehaviour {
         loadingScreen.loadLevel1 = true;
     }
 
+    public void CurryGamesButton()
+    {
+        Application.OpenURL("http://currygames.itch.io/");
+    }
 
     public void StatsButton()
     {
