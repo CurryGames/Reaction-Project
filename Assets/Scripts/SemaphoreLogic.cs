@@ -123,7 +123,8 @@ public class SemaphoreLogic : MonoBehaviour {
                 {
                         if(loadingScreen.showAd >= 5)
                         {
-                            Chartboost.showInterstitial(CBLocation.Default);   
+                            Chartboost.showInterstitial(CBLocation.Default);
+                            loadingScreen.showAd = 0;
                         }
 
                         defeatCanvas.SetActive(true);

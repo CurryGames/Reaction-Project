@@ -121,6 +121,7 @@ public class ArcadeLogic : MonoBehaviour {
         if (loadingScreen.showAd >= 5)
         {
             Chartboost.showInterstitial(CBLocation.Default);
+            loadingScreen.showAd = 0;
         }
 
         if (PlayerPrefs.GetFloat("ArcadeHS") < currentTime)
