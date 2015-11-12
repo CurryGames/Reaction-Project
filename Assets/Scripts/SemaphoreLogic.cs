@@ -178,7 +178,7 @@ public class SemaphoreLogic : MonoBehaviour {
                     PlayerPrefs.SetFloat("ReactAverage",reactAverage);
                     PlayerPrefs.SetFloat("ReactPlayedNum", reactPlayedNum);
 
-                    hsReaction.text = "Best Time: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
+                    hsReaction.text = "Record: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
                     break;
             }
         }

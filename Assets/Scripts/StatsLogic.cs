@@ -28,9 +28,9 @@ public class StatsLogic : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        reactBest.text = "Best: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
+        reactBest.text = "Record: " + PlayerPrefs.GetFloat("SemaphoreHS").ToString("000") + " ms";
         reactAverage.text = "Average: " + PlayerPrefs.GetFloat("ReactAverage").ToString("000") + " ms";
-        aimBest.text = "MaxTime: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00") + " s";
+        aimBest.text = "Record: " + PlayerPrefs.GetFloat("ArcadeHS").ToString("00.00") + " s";
         aimTargets.text = "Targets: " + PlayerPrefs.GetFloat("ArcadeTargetsNum").ToString("0");
         aimAverage.text = "Average: " + PlayerPrefs.GetFloat("ArcadeAverage").ToString("00.00") + " s";
 
