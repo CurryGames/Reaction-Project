@@ -46,8 +46,8 @@ public class ObjectsArray : MonoBehaviour {
 
             if (lifes <= 0) playing = false;
 
-            if (minRan >= 0.15f) minRan -= 0.005f * Time.deltaTime;
-            if (maxRan >= 0.2f) maxRan -= 0.007f * Time.deltaTime;
+            if (minRan >= 0.2f) minRan -= 0.005f * Time.deltaTime;
+            if (maxRan >= 0.25f) maxRan -= 0.007f * Time.deltaTime;
         }
         else
         {

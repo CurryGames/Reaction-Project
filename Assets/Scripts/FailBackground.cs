@@ -11,7 +11,7 @@ public class FailBackground : MonoBehaviour
     private float initAlpha;
     private float fadeOutDuration;
     private Color colorImage;
-    private Image image;
+    private Renderer image;
 
     public bool animActive = false;
     private bool fadeIn = true;
@@ -20,8 +20,8 @@ public class FailBackground : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        image = GetComponent<Image>();
-        colorImage = image.color;
+        image = GetComponent<Renderer>();
+        colorImage = image.material.color;
         initAlpha = 0;
         finalValueAlpha = colorImage.a;
         timeDuration = 0.2f;
@@ -43,7 +43,7 @@ public class FailBackground : MonoBehaviour
                     float currentAlpha = (float)Easing.CubicEaseIn(timeCounter, initAlpha, (finalValueAlpha - initAlpha), timeDuration);
 
                     colorImage.a = currentAlpha;
-                    image.color = colorImage;
+                    image.material.color = colorImage;
 
                 }
                 else
@@ -60,7 +60,7 @@ public class FailBackground : MonoBehaviour
                     float currentAlpha = (float)Easing.CubicEaseIn(timeCounter, finalValueAlpha, (initAlpha - finalValueAlpha), fadeOutDuration);
 
                     colorImage.a = currentAlpha;
-                    image.color = colorImage;
+                    image.material.color = colorImage;
 
                 }
                 else animActive = false;
@@ -77,7 +77,7 @@ public class FailBackground : MonoBehaviour
     {
         timeCounter = 0;
         colorImage.a = finalValueAlpha;
-        image.color = colorImage;
+        image.material.color = colorImage;
         fadeIn = false;
     }
 
@@ -85,7 +85,7 @@ public class FailBackground : MonoBehaviour
     {
         timeCounter = 0;
         colorImage.a = 0;
-        image.color = colorImage;
+        image.material.color = colorImage;
         fadeIn = true;
     }
 }
