@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour {
 
     LoadingScreen loadingScreen;
     bool stats;
+    private AudioManager audioManager;
     public GameObject menuCanvas, statsCanvas;
 
 	// Use this for initialization
@@ -25,7 +26,7 @@ public class MenuManager : MonoBehaviour {
             // handle success or failure
         });
 
-
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
 	}
 
@@ -54,11 +55,15 @@ public class MenuManager : MonoBehaviour {
     public void LevelAim()
     {
         loadingScreen.loadLevel2 = true;
+        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+        audioManager.Play(audioManager.laser, audiSor, 1.0f);
     }
 
     public void LevelReaction()
     {
         loadingScreen.loadLevel1 = true;
+        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+        audioManager.Play(audioManager.laser, audiSor, 1.0f);
     }
 
     public void CurryGamesButton()
@@ -69,5 +74,7 @@ public class MenuManager : MonoBehaviour {
     public void StatsButton()
     {
         stats = !stats;
+        AudioSource audiSor = gameObject.AddComponent<AudioSource>();
+        audioManager.Play(audioManager.laser, audiSor, 1.0f);
     }
 }
