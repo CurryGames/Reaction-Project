@@ -121,7 +121,7 @@ public class SemaphoreLogic : MonoBehaviour {
                 if (redSignal.activeInHierarchy) redSignal.SetActive(false);
                 if (lifes > 4)
                 {
-                        if(loadingScreen.showAd >= 5)
+                        if(loadingScreen.showAd >= 4)
                         {
                             Chartboost.showInterstitial(CBLocation.Default);
                             loadingScreen.showAd = 0;
@@ -199,7 +199,7 @@ public class SemaphoreLogic : MonoBehaviour {
 
     void Clicking()
     {
-        int thisMark = lifes + 1;
+        //int thisMark = lifes + 1;
         marks[lifes] = reactionTime;
         marksText[lifes].text = reactionTime.ToString("000");
         AnimateNumbers();

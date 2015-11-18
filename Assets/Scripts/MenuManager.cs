@@ -3,6 +3,7 @@ using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
 using System.Collections;
+using ChartboostSDK;
 
 public class MenuManager : MonoBehaviour {
 
@@ -28,6 +29,12 @@ public class MenuManager : MonoBehaviour {
 
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
+
+        if(!loadingScreen.isShownAd)
+        {
+            Chartboost.showInterstitial(CBLocation.Default);
+            loadingScreen.isShownAd = true;
+        }
 	}
 
     // Update is called once per frame

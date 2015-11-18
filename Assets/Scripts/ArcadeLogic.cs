@@ -76,11 +76,17 @@ public class ArcadeLogic : MonoBehaviour {
                 Clicking(ray);
 
             }
-            else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            else if(Input.touchCount > 0 )
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-
-                Clicking(ray);
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    if(Input.GetTouch(i).phase == TouchPhase.Began)
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                        Clicking(ray);
+                    }
+                }
+                
             }
 
 

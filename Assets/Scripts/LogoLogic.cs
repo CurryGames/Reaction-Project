@@ -14,6 +14,7 @@ public class LogoLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        Chartboost.cacheInterstitial(CBLocation.Default);
 
         _maxTime = 2.0f;
         
@@ -45,7 +46,7 @@ public class LogoLogic : MonoBehaviour {
         });
 
         loadingScreen.loadMenu = true;
-        Chartboost.cacheInterstitial(CBLocation.Default);
-        Chartboost.showInterstitial(CBLocation.Default);
+        
+        //Chartboost.showInterstitial(CBLocation.Default);
     }
 }

@@ -9,6 +9,7 @@ public class LoadingScreen : MonoBehaviour {
     public bool loadMenu;
     public bool loadLevel1, loadLevel2;
     public int showAd;
+    public bool isShownAd;
     private int myLevel;
     //private DataLogic dataLogic;
     public float tempInit = 1f;
