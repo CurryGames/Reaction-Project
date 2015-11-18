@@ -31,7 +31,7 @@ public class SemaphoreLogic : MonoBehaviour {
         {
             marksText[i].text = "-";
         }
-        Chartboost.cacheInterstitial(CBLocation.Default);
+        //Chartboost.cacheInterstitial(CBLocation.Default);
         reactAverage = PlayerPrefs.GetFloat("ReactAverage");
         reactPlayedNum = PlayerPrefs.GetFloat("ReactPlayedNum");
 

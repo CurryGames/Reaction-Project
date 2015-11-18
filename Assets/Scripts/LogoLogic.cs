@@ -2,6 +2,7 @@
 using System.Collections;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using ChartboostSDK;
 using UnityEngine.SocialPlatforms;
 
 public class LogoLogic : MonoBehaviour {
@@ -21,6 +22,9 @@ public class LogoLogic : MonoBehaviour {
         });
 
         Application.LoadLevel(1);
+
+        Chartboost.cacheInterstitial(CBLocation.Default);
+        Chartboost.showInterstitial(CBLocation.Default);
     }
 	
 	// Update is called once per frame
