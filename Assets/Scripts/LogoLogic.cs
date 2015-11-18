@@ -7,6 +7,10 @@ using UnityEngine.SocialPlatforms;
 
 public class LogoLogic : MonoBehaviour {
 
+    private float _currentTime, _maxTime;
+    public LoadingScreen loadingScreen;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -21,14 +25,25 @@ public class LogoLogic : MonoBehaviour {
             // handle success or failure
         });
 
-        Application.LoadLevel(1);
-
-        Chartboost.cacheInterstitial(CBLocation.Default);
-        Chartboost.showInterstitial(CBLocation.Default);
+        _maxTime = 2.0f;
+        
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        _currentTime += Time.deltaTime;
+
+        if(_currentTime >= _maxTime)
+        {
+            LoadMenu();
+        }
 	}
+
+    void LoadMenu()
+    {
+        loadingScreen.loadMenu = true;
+        Chartboost.cacheInterstitial(CBLocation.Default);
+        Chartboost.showInterstitial(CBLocation.Default);
+    }
 }

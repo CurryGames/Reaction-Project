@@ -13,11 +13,26 @@ public class LoadingScreen : MonoBehaviour {
     //private DataLogic dataLogic;
     public float tempInit = 1f;
     public Color color;
+    LoadingScreen instance;
     public bool soundON;
 
-	// Use this for initialization
-	void Start () {
-        state = State.FADEOUT;        
+    void Awake()
+    {
+        //destroy the already existing instance, if any
+        if (instance)
+        {
+            Destroy(instance.gameObject);
+
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this);
+    }
+
+    // Use this for initialization
+    void Start () {
+        state = State.FADEIN;        
         temp = tempInit;
         color = GetComponent<Renderer>().material.color;
         /*dataLogic = GameObject.FindGameObjectWithTag("DataLogic").
